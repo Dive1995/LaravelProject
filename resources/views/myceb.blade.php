@@ -62,6 +62,7 @@
         <!-- <p>You may have to pay more money per units according your usage, keep that in mind.</p> -->
 
         <div class="text-center my-9">
+        <!-- <p class="text-red-700">* Please attach a photo of your meter reading </p> -->
         <p class="text-red-700">* This form is submittable only for the first week of each month.</p>   
         <p class="text-red-700">* Please double check your reading before submitting, you can submit only one time for a month</p>
         </div>

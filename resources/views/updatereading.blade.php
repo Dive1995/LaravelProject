@@ -73,12 +73,16 @@
                                             <div class="flex items-center">
                                             <form action="/dashboard/updatereading" method="post" >
                                             @csrf
-                                                <input id="input" name="reading" class="text-center" type="number" placeholder="{{$user['reading']}}" >
-  
+                                                <input required id="input" name="reading" class="text-center" type="number" placeholder="{{$user['reading']}}" >
                                                 <button class="w-4 mr-2 transform text-purple-500 hover:scale-110" type="submit" name="submit">
                                                     Update
                                                 </button>
 
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                        <li class="text-red-600">{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>   
                                                 <!-- other needed hidden data -->
                                                 <input type="number" value="{{$user['reading']}}" name="last_reading" hidden>
                                                 <input type="text" value="{{$user['type']}}" name="type" hidden>

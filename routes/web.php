@@ -1,10 +1,16 @@
 <?php
 
+namespace Illuminate\Foundation\Validation;
+
+
 use Illuminate\Support\Facades\Route;
 use App\Models\Feedback;
 use App\Models\Billings;
 use App\Models\Newuser;
+use Illuminate\Http\Request;
 use App\Models\Allusers;
+use Illuminate\Support\Facades\Redirect;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,11 +33,11 @@ Route::get('/', function () {
 
 // new user
 
-Route::get('/newcustomer',function(){
+Route::get('/newCustomer',function(){
     return view('newCustomer');
 });
 
-Route::post('/newcustomer', function(){
+Route::post('/newCustomer', function(){
     $newuser = new Newuser();
 
     $newuser->fname = request('fname');
@@ -42,9 +48,24 @@ Route::post('/newcustomer', function(){
     $newuser->gs_division = request('gs_division');
     $newuser->email = request('email');
     $newuser->type = request('type');
-    
-    $newuser->save();
 
+    $mobileregex = "/^[0-9]{10}$/" ;  
+    $nicregex = "/^[0-9]{9}[v]$/" ;  
+
+    if(preg_match($mobileregex, request('phone')) === 1){
+        if(preg_match($nicregex, request('nic')) === 1){
+            $newuser->save();
+        }else{
+            return Redirect::back()->withErrors([ 'Invalid NIC number']);
+        }
+    }else{
+        return Redirect::back()->withErrors([ 'Invalid Phone number']);
+    }
+
+    
+    
+    
+    return redirect('/')->with('msg','Your request has been sent succefully');
 });
 
 // 
@@ -56,11 +77,13 @@ Route::get('/feedback', function(){
 });
 
 
-Route::post('/feedback', function(){
-    // error_log(request('title'));
-    // error_log(request('subject'));
-
+Route::post('/feedback', function(Request $request){
     $feedback = new Feedback();
+
+    $request->validate([
+        'title' => 'required',
+        'subject' => 'required'
+    ]);
 
     $feedback->title = request('title');
     $feedback->subject = request('subject');

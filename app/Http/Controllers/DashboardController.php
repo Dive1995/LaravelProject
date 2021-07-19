@@ -19,17 +19,6 @@ class DashboardController extends Controller
         if(Auth::user()->hasRole('user')){
             $user = Allusers::where('ceb',Auth::user()->ceb)->first();
 
-            // $last_date = $user->updated_at;
-            // error_log($last_date);
-            // $datetime1 = new DateTime();
-            // $datetime2 = new DateTime($last_date);
-            // $interval = $datetime1->diff($datetime2);
-            // $days = $interval->format('%a');
-            // error_log($days);
-            // error_log('days');
-            // error_log('hi');
-            // session()->flash('days',$days);
-
             return view('myceb',['user'=>$user]);
         }elseif(Auth::user()->hasRole('admin')){
             return view('/dashboard',['users' => $users]);
@@ -62,6 +51,7 @@ class DashboardController extends Controller
 
     // show users those don't have online account and update their reading
     public function updatereading(){
+        // use ::whereMonth()
         $users = Allusers::where('hasAccount','no')->get();
         // $users = Allusers::all();
         return view('updatereading',['users' => $users]);
@@ -76,7 +66,7 @@ class DashboardController extends Controller
         // checking num of days from today and last submitted day
 
         $last_date = $request->updated_at;
-        $datetime1 = new DateTime();//'2021-08-03 05:34:44'
+        $datetime1 = new DateTime('2021-08-19');//'2021-08-19'
         $datetime2 = new DateTime($last_date);
         $interval = $datetime1->diff($datetime2);
         $days = $interval->format('%a');
@@ -87,6 +77,12 @@ class DashboardController extends Controller
             $request->validate([
                 'reading' => 'required',
             ]);
+
+            //check if user input less than last reading
+            if(request('last_reading') > request('reading')){
+                return Redirect::back()->withErrors([ 'Invalid Reading']);
+            }
+
     
             // calculating billings
     

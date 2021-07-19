@@ -68,8 +68,13 @@
             <p>This application form issued by the CEB should be filled and signed by the applicant himself/herself.</p> -->
             <div class="form">
                 <h2>New customer form</h2>
-                <form action="/newcustomer" method="post">
+                <form action="/newCustomer" method="post">
                 @csrf
+                <ul style="margin-bottom: 20px;">
+                    @foreach ($errors->all() as $error)
+                        <li style="color: red;">{{ $error }}</li>
+                    @endforeach
+                </ul>   
                     <div class="input">
                         <input type="text" name="fname" required placeholder="First Name">
                         <input type="text" name="lname" required placeholder="Last Name">

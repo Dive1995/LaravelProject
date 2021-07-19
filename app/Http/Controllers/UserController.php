@@ -77,13 +77,16 @@ class UserController extends Controller
 
         // checking num of days from today and last submitted day
         // $fdate = $request->Fdate;
-        $last_date = $request->updated_at;
-        $datetime1 = new DateTime();//'2021-08-03 05:34:44'
+        $last_date = request('date');
+        // $name = $request->input('name');
+        $datetime1 = new DateTime();//'2021-08-19'
         $datetime2 = new DateTime($last_date);
         $interval = $datetime1->diff($datetime2);
         $days = $interval->format('%a');
-        
+            // $days=29;
         error_log($days);
+        error_log($last_date);
+
         if($days >= 28 && $days < 37){
 
             $request->validate([
@@ -119,6 +122,9 @@ class UserController extends Controller
                 $total = $account_balance + $amount;
             }
 
+            if(request('last_reading') > request('reading')){
+                return Redirect::back()->withErrors([ 'Invalid Reading']);
+            }
 
 
             // check if image exist and upload it

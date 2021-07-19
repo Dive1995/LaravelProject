@@ -61,9 +61,18 @@
                 <h2>Feedback</h2>
                 <form action="/feedback" method="POST">
                     @csrf
+                    @if ($errors->any())
+                        <div style="margin-bottom: 20px;">
+                            <ul>
+                            @foreach ($errors->all() as $error)
+                                <li style="color: red;">{{ $error }}</li>
+                            @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div class="input">
-                        <input type="text" name="title" placeholder="What's your feedback about ?">
-                        <textarea id="subject" name="subject"  placeholder="Tell us a little more..."></textarea>
+                        <input required type="text" name="title" placeholder="What's your feedback about ?">
+                        <textarea required id="subject" name="subject"  placeholder="Tell us a little more..."></textarea>
                     </div>
                     <input type="submit" name="submit" class="btn-primary">
                 </form>
