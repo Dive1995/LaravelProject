@@ -104,18 +104,6 @@ Route::post('/feedback', function(Request $request){
 // 
 
 
-
-// auth route for user and admin
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth'])->name('dashboard');
-
-// Route::group(['middleware' => ['auth','role:user']], function(){
-//     Route::get('/myceb','App\Http\Controllers\DashboardController@myceb')->name('myceb');
-// });
-
-
 // route user and admin to their dashboards when they login / register
 
 Route::group(['middleware' => ['auth']], function(){
@@ -141,11 +129,22 @@ Route::group(['middleware' => ['auth','role:user']], function(){
 // admin roles
 
 Route::group(['middleware' => ['auth', 'role:admin']], function(){
+    // New Request
     Route::get('/dashboard/newrequest','App\Http\Controllers\DashboardController@newrequest')->name('dashboard.newrequest');
+
+    // User Feedback
     Route::get('/dashboard/userfeedback','App\Http\Controllers\DashboardController@feedback')->name('dashboard.userfeedback');
+
+    // Show Update Reading
     Route::get('/dashboard/updatereading','App\Http\Controllers\DashboardController@updatereading')->name('dashboard.updatereading');
+
+    // Show single user
+    Route::get('/dashboard/updatereading/{id}','App\Http\Controllers\DashboardController@showuser')->name('dashboard.updatereading');
+
+    // Update reading as admin
     Route::post('/dashboard/updatereading','App\Http\Controllers\DashboardController@setreading')->name('dashboard.updatereading');
-    // Route::get('/dashboard','App\Http\Controllers\UserController@displayusers');
+
+    // Dashboard Home
     Route::post('/dashboard','App\Http\Controllers\UserController@addusers');
 });
 
@@ -155,3 +154,13 @@ Route::group(['middleware' => ['auth', 'role:admin']], function(){
 require __DIR__.'/auth.php';
 
 
+
+// auth route for user and admin
+
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth'])->name('dashboard');
+
+// Route::group(['middleware' => ['auth','role:user']], function(){
+//     Route::get('/myceb','App\Http\Controllers\DashboardController@myceb')->name('myceb');
+// });

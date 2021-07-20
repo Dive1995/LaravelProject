@@ -53,7 +53,7 @@ class DashboardController extends Controller
     // show users who didn't update the reading for the month (both registered & unregistered)
     public function updatereading(){
         // use ::whereMonth()
-        $users = Allusers::where('hasAccount','no')->get();
+        // $users = Allusers::where('hasAccount','no')->get();
         $today = getdate();
         $month = $today["mon"];
         // error_log($month);
@@ -63,6 +63,21 @@ class DashboardController extends Controller
         // $users = Allusers::all();
         return view('updatereading',['users' => $users]);
     }
+    // 
+
+
+    // show single user
+    public function showuser($id)
+    {
+        // $user = Allusers::where('id',$id)->get();
+        // error_log($user);
+        // return view('user',['user'=>$user]);
+        error_log($id);
+        $user = Allusers::where('id',$id)->first();
+        error_log($user);
+        return view('/user',['user'=>$user]);
+    }
+
     // 
 
 

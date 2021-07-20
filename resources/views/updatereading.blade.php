@@ -32,6 +32,7 @@
                                         <th class="py-3 px-6 text-center">Type</th>
                                         <th class="py-3 px-6 text-center">Balance</th>
                                         <th class="py-3 px-6 text-center">Reading</th>
+                                        <th class="py-3 px-6 text-center">Edit</th>
                                         <!-- <th class="py-3 px-6 text-center">Account</th> -->
                                         <!-- <th class="py-3 px-6 text-center">Action</th> -->
                                     </tr>
@@ -70,36 +71,24 @@
                                                 {{$user['type']}}
                                             </div>
                                         </td>
+                                        
                                         <td class="py-3 px-6 ">
                                             <div class="flex items-center">
                                                 {{$user['balance']}}
                                             </div>
                                         </td>
 
+                                        <td class="py-3 px-6 ">
+                                            <div class="flex items-center">
+                                                {{$user['reading']}}
+                                            </div>
+                                        </td>
                                         <!-- form -->
                                         
                                         
                                         <td class="py-3 px-6 ">
                                             <div class="flex items-center">
-                                            <form action="/dashboard/updatereading" method="post" >
-                                            @csrf
-                                                <input required id="input" name="reading" class="text-center" type="number" placeholder="{{$user['reading']}}" >
-                                                <button class="w-4 mr-2 transform text-purple-500 hover:scale-110" type="submit" name="submit">
-                                                    Update
-                                                </button>
-
-                                                <ul>
-                                                    @foreach ($errors->all() as $error)
-                                                        <li class="text-red-600">{{ $error }}</li>
-                                                    @endforeach
-                                                </ul>   
-                                                <!-- other needed hidden data -->
-                                                <input type="number" value="{{$user['reading']}}" name="last_reading" hidden>
-                                                <input type="text" value="{{$user['type']}}" name="type" hidden>
-                                                <input type="number" value="{{$user['ceb']}}" name="ceb" hidden>
-                                                <input type="number" value="{{$user['balance']}}" name="balance" hidden>
-                                                <input type="number" value="{{$user['updated_at']}}" name="date" hidden>
-                                            </form>
+                                            <a class="text-blue-500" href = 'updatereading/{{ $user->id }}'>Edit</a>
                                             </div>
                                         </td>
                      
