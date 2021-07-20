@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Allusers;
+use App\Models\Newuser;
 use App\Models\Feedback;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -28,22 +29,13 @@ class DashboardController extends Controller
 
     // user apply for new request
     public function newrequest(){
-        return view('newrequest');
+        $users = Newuser::all();
+        return view('newrequest',['users' => $users]);
     }
 
 
     // feeedback
     public function feedback(){
-
-        // $feedback = DB::table('feedback')
-        //     ->join('users', 'users.id', '=', 'feedback.userID')
-        //     ->select('feedback.*', 'users.name')
-        //     ->get();
-
-        // $feedback = Feedback::join('allusers', 'feedback.userID', '=', 'allusers.id')
-        //        ->get(['feedback.*', 'allusers.lname']);
-
-
         $feedback = Feedback::all();
         return view('userfeedback',['feedback'=>$feedback]);
     }
@@ -82,7 +74,7 @@ class DashboardController extends Controller
 
 
     // set reading to non-account users
-    public function setreading(Request $request){
+    public function setreading(Request $request,$id){
         error_log('submitted');
 
         // checking num of days from today and last submitted day
@@ -136,16 +128,17 @@ class DashboardController extends Controller
             }
 
             
-            error_log($ceb);
+            error_log($id);
+            error_log(request('reading'));
             // update allusers table reading, balance column
-            Allusers::where('ceb',$ceb)->update(['reading'=> request('reading')]);
-            Allusers::where('ceb',$ceb)->update(['balance'=> $total]);
+            Allusers::where('id',$id)->update(['reading'=> request('reading')]);
+            Allusers::where('id',$id)->update(['balance'=> $total]);
 
 
             return redirect('/dashboard/updatereading')->with('msg','Reading has successfully updated !!');
 
         }else{
-            return Redirect::back()->withErrors([ 'You have already submitted the reading for this month!!']);
+            return Redirect::back()->withErrors([ 'Already submitted the reading for this month!!']);
         }
 
     }

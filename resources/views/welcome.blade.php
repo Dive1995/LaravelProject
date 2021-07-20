@@ -24,18 +24,20 @@
                             <li><a href="/">Home</a></li>
                             <li><a href="/contact">Contact Us</a></li>
                             <li><a href="/dashboard">Dashboard</a></li>
+                            @if (Auth::check())
+                                <li>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <a href="route('logout')"
+                                            onclick="event.preventDefault();
+                                            this.closest('form').submit();">
+                                        {{ __('Log Out') }}
+                                    </a>
+                                </form>
+                                </li>
+                            @else
                             <li><a href="/login">Sign In</a></li>
-                            <li>
-                            <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-
-                            <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                            </x-dropdown-link>
-                        </form>
-                            </li>
+                            @endif
                         </ul>
                     </div>
                 </div>
@@ -49,8 +51,8 @@
                         <p>
                             Illuminating the Motherland
                         </p>
-                        <a href="/login" class="btn-primary">Login</a>
-                        <a href="/register" class="btn-secondary">Register</a>
+                        <a href="/login" class="home-login">Login</a>
+                        <a href="/register" class="home-register">Register</a>
                     </div>
 
                 </div>

@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                 @if (session('msg'))
-                    <div class="text-green-600 bg-green-100 p-3 rounded-md">
+                    <div class=" bg-green-300 p-3 rounded-md mb-6">
                         <h5>{{session('msg')}}</h5>
                         <!-- <form action="/" method="POST">
                             <input type="button" name="close" value="X">
@@ -117,6 +117,7 @@
                                         <th class="py-3 px-6 text-center">Type</th>
                                         <th class="py-3 px-6 text-center">Balance</th>
                                         <th class="py-3 px-6 text-center">Reading</th>
+                                        <th class="py-3 px-6 text-center">Edit</th>
                                         <!-- <th class="py-3 px-6 text-center">Account</th> -->
                                         <!-- <th class="py-3 px-6 text-center">Action</th> -->
                                     </tr>
@@ -161,30 +162,18 @@
                                             </div>
                                         </td>
 
+
+                                        <td class="py-3 px-6 ">
+                                            <div class="flex items-center">
+                                                {{$user['reading']}}
+                                            </div>
+                                        </td>
                                         <!-- form -->
                                         
                                         
                                         <td class="py-3 px-6 ">
                                             <div class="flex items-center">
-                                            <form action="/dashboard/updatereading" method="post" >
-                                            @csrf
-                                                <input required id="input" name="reading" class="text-center" type="number" placeholder="{{$user['reading']}}" >
-                                                <button class="w-4 mr-2 transform text-purple-500 hover:scale-110" type="submit" name="submit">
-                                                    Update
-                                                </button>
-
-                                                <ul>
-                                                    @foreach ($errors->all() as $error)
-                                                        <li class="text-red-600">{{ $error }}</li>
-                                                    @endforeach
-                                                </ul>   
-                                                <!-- other needed hidden data -->
-                                                <input type="number" value="{{$user['reading']}}" name="last_reading" hidden>
-                                                <input type="text" value="{{$user['type']}}" name="type" hidden>
-                                                <input type="number" value="{{$user['ceb']}}" name="ceb" hidden>
-                                                <input type="number" value="{{$user['balance']}}" name="balance" hidden>
-                                                <input type="number" value="{{$user['updated_at']}}" name="date" hidden>
-                                            </form>
+                                            <a class="text-blue-500" href = 'updatereading/{{ $user->id }}'>Edit</a>
                                             </div>
                                         </td>
                      

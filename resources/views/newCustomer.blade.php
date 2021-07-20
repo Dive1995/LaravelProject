@@ -81,7 +81,7 @@
                         <input type="text" name="nic" required placeholder="NIC">
                         <input type="number" name="phone" required placeholder="Phone Number">
                         <input type="text" name="address" required placeholder="Address">
-                        <input type="text" name="gs_division" required placeholder="GS Division">
+                        <input type="text" name="gs_division" required placeholder="GS Division (eg: J-194)">
                         <input type="email" name="email" required placeholder="Email">
                             <select name="type" id="">
                                 <option value="domestic">Domestic Purpose</option>

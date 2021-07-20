@@ -29,13 +29,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// close the message 
-// Route::post('/', function (Request $request) {
-//     $request->session()->forget('name');
-//     error_log('clodes');
-//     redirect('welcome');
-// });
+// contact page
+Route::get('/contact', function () {
+    return view('contact');
+});
 
+// plans page
+Route::get('/plans', function () {
+    return view('plans');
+});
 
 
 // new user
@@ -57,7 +59,7 @@ Route::post('/newCustomer', function(){
     $newuser->type = request('type');
 
     $mobileregex = "/^[0-9]{10}$/" ;  
-    $nicregex = "/^[0-9]{9}[v]$/" ;  
+    $nicregex = "/^[0-9]{9}[vV]$/" ;  
 
     if(preg_match($mobileregex, request('phone')) === 1){
         if(preg_match($nicregex, request('nic')) === 1){
@@ -142,7 +144,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function(){
     Route::get('/dashboard/updatereading/{id}','App\Http\Controllers\DashboardController@showuser')->name('dashboard.updatereading');
 
     // Update reading as admin
-    Route::post('/dashboard/updatereading','App\Http\Controllers\DashboardController@setreading')->name('dashboard.updatereading');
+    Route::post('/dashboard/updatereading/{id?}','App\Http\Controllers\DashboardController@setreading')->name('dashboard.updatereading');
 
     // Dashboard Home
     Route::post('/dashboard','App\Http\Controllers\UserController@addusers');

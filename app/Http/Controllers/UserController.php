@@ -29,7 +29,7 @@ class UserController extends Controller
 
 
         $mobileregex = "/^[0-9]{10}$/" ;  
-    $nicregex = "/^[0-9]{9}[v]$/" ;  
+        $nicregex = "/^[0-9]{9}[vV]$/" ;  
 
         if(preg_match($mobileregex, request('phone')) === 1){
             if(preg_match($nicregex, request('nic')) === 1){
@@ -48,44 +48,6 @@ class UserController extends Controller
     public function billing(Request $request){
         
         $billing = new Billings();
-
-        // $request->validate([
-        //     'reading' => 'required',
-        // ]);
-
-        // // calculating billings
-
-        // $amount = 60;
-        // $account_balance = request('balance');
-
-        // $units = request('reading') - request('last_reading');
-        // error_log($units);
-        
-        // if($units > 120){
-        //     error_log('above 120');
-        //     $amount += $units*10;
-        //     $total = $account_balance + $amount;
-        // }
-        // else if($units >= 90 && $units <= 120){
-        //     error_log('90 and above  && less than 120');
-        //     $amount += $units*8;
-        //     $total = $account_balance + $amount;
-        // }
-        // else if($units > 60){
-        //     error_log('60 and above 60');
-        //     $amount += $units*6;
-        //     $total = $account_balance + $amount;
-        // }
-        // else if($units <= 60){
-        //     error_log('less than 60');
-        //     $amount += $units*4;
-        //     $total = $account_balance + $amount;
-        // }
-        // 
-
-        // error_log($amount);
-        // error_log($total);
-
 
         // checking num of days from today and last submitted day
         // $fdate = $request->Fdate;
@@ -181,13 +143,6 @@ class UserController extends Controller
         }else{
             return Redirect::back()->withErrors([ 'You have already submitted the reading for this month!!']);
         }
-        
-
-         
-
-        
-
-
         
     }
 }

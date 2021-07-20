@@ -220,7 +220,7 @@ a {
 }
 
 .header {
-  background: url(/images/electricity.jpeg) no-repeat center center/cover;
+  background: url(/images/contactus-1.webp) no-repeat center center/cover;
   padding-bottom: 30px;
   color: white;
   position: relative;
@@ -292,97 +292,29 @@ a {
   margin: 20px 0;
 }
 
-
-
-.billing {
-  margin-top: 60px;
-  gap: 40px;
-  grid-template-columns: 60% 40%;
-}
-
-.billing img {
-  width: 100%;
-  border-radius: 5px;
-}
-
-.billing-text p {
-  margin: 15px 0;
-}
-
-.billing-text a {
-  display: inline-block;
-}
-
-.card-section {
-  grid-template-columns: repeat(4, 1fr);
+.contact {
   margin: 60px 0;
 }
 
-.card-section img {
+.contact h2 {
+  margin: 20px 0;
+}
+
+.contact-grid img {
   width: 100%;
-  height: 150px;
 }
 
-.hotline {
-  margin-top: 60px;
-}
-
-.hotline .hotline-item {
-  background-color: #d87471;
-  color: #fff;
-  height: 90px;
-  width: 160px;
-  text-align: center;
-  align-self: center;
+.contact-table {
+  background-color: #daecfc;
+  max-width: 500px;
+  border-radius: 10px;
   padding: 20px;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
-  cursor: pointer;
-  border-radius: 5px;
 }
 
-.hotline .hotline-item h1, .hotline .hotline-item h2 {
-  font-weight: 300;
-}
-
-.home-login{
-  padding: 12px 24px;
-  border: 0;
-  cursor: pointer;
-  border-radius: 5px;
-  font-weight: bold;
-  color: #fff;
-  background-color: #64b0f3;
-  font-size: 16px;
-}
-
-.home-login :hover {
-  background-color: #3598ef;
-}
-
-.home-register{
-  padding: 12px 24px;
-  border: 0;
-  cursor: pointer;
-  border-radius: 5px;
-  font-weight: bold;
-  color: #fff;
-  background-color: #e68e3b;
-  font-size: 16px;
-}
-
-.home-login :hover {
-  background-color: #3598ef;
-}
-
-/* home screen message */
-.message{
-  background-color: rgb(222, 243, 191);
-  padding: 20px;
-  margin-top: 30px;
-  border-radius: 8px;
-}
-
-.message h5{
-  color: green;
-  font-size: 1rem;
+.contact-table p {
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: #333;
+  border: 1px solid #aaaaaa;
+  background-color: #fff;
 }
