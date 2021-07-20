@@ -54,8 +54,12 @@ class DashboardController extends Controller
     public function updatereading(){
         // use ::whereMonth()
         $users = Allusers::where('hasAccount','no')->get();
-        // $month = new Date('m');
-        // $users = Allusers::whereMonth('updated_at','no')->get();
+        $today = getdate();
+        $month = $today["mon"];
+        // error_log($month);
+        $users = Allusers::whereMonth('updated_at',$month)->get();
+
+        // get all users
         // $users = Allusers::all();
         return view('updatereading',['users' => $users]);
     }
