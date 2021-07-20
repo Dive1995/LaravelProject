@@ -9,7 +9,13 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-9 bg-white border-b border-gray-200">
-
+                    <!-- errors -->
+                    @foreach ($errors->all() as $error)
+                        <div class="bg-red-100 rounded-lg p-4 mb-6">
+                                <p class="text-red-800 text-md">{{ $error }}</p>
+                        </div>  
+                    @endforeach
+                    
                     <!-- button to open modal -->
                     <button onclick="showHideModal()"  class="py-2 px-3 mb-6 bg-blue-400 cursor-pointer text-white rounded-md hover:bg-blue-500 ">Add new user</button>
 

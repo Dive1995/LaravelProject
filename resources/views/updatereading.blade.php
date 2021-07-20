@@ -9,6 +9,14 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
+                @if (session('msg'))
+                <div class="text-green-600 bg-green-100 p-3 rounded-md">
+                    <h5>{{session('msg')}}</h5>
+                    <!-- <form action="/" method="POST">
+                        <input type="button" name="close" value="X">
+                    </form> -->
+                </div>
+            @endif
                     <!-- list all users -->
                     <div class="w-full ">
                         <div class="bg-white shadow-md rounded my-6">

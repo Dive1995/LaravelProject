@@ -341,3 +341,16 @@ a {
 .hotline .hotline-item h1, .hotline .hotline-item h2 {
   font-weight: 300;
 }
+
+/* home screen message */
+.message{
+  background-color: rgb(222, 243, 191);
+  padding: 20px;
+  margin-top: 30px;
+  border-radius: 8px;
+}
+
+.message h5{
+  color: green;
+  font-size: 1rem;
+}

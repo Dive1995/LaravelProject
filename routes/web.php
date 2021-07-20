@@ -29,6 +29,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// close the message 
+// Route::post('/', function (Request $request) {
+//     $request->session()->forget('name');
+//     error_log('clodes');
+//     redirect('welcome');
+// });
+
 
 
 // new user

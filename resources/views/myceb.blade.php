@@ -12,7 +12,7 @@
 
 <!-- myceb -->
 <div class="container">
-<div class="myceb">
+<div class="myceb mb-9">
 
        <!-- displaay user details -->
        <div class="usercontainer">
@@ -41,6 +41,12 @@
                 <h5>Next Billing Date</h5>
                 <p>{{date("Y-m-d", strtotime("+1 month", strtotime($user['updated_at'])))}}</p>
             </div>
+            @if ($user['balance'] > 4000)
+                <div class="grid">
+                    <h5 class="text-red-700">NOTICE</h5>
+                    <p class="text-red-500">Your balance have reached over Rs.2000, please settle down</p>
+                </div>
+            @endif
         </div>
     </div>
    
@@ -80,9 +86,18 @@
 
             <ul>
                 @foreach ($errors->all() as $error)
-                    <li class="text-red-600">{{ $error }}</li>
+                    <li class="text-red-600 bg-red-100 p-3 rounded-md">{{ $error }}</li>
                 @endforeach
             </ul>   
+
+            @if (session('msg'))
+                <div class="text-green-600 bg-green-100 p-3 rounded-md">
+                    <h5>{{session('msg')}}</h5>
+                    <!-- <form action="/" method="POST">
+                        <input type="button" name="close" value="X">
+                    </form> -->
+                </div>
+            @endif
 
             <div class="grid userinput">
                     <label for="current_reading">Enter this month reading</label>
@@ -99,15 +114,15 @@
             <input type="number" value="{{$user['balance']}}" name="balance" hidden>
             <input type="number" value="{{$user['updated_at']}}" name="date" hidden>
 
-            <button name="submit" type="submit" class="btn-primary">Submit</button>
+            <button id="btn" name="submit" type="submit" class="btn-primary">Submit</button>
             
         </form>
        
-        <!-- {{Session::get('days') ?? 'none' }} -->
+
 
     </div>
 
-    <div class="pt-9 bg-green-100 myceb-form my-9 rounded-lg" style="display: {{session('display') ?? 'none'}}">
+    <div class="pt-9  bg-green-100 myceb-form my-9 rounded-lg" style="display: {{session('display') ?? 'none'}}">
             <form action="">
                 <div class="grid userinput">
                             <label for="current_readin">This month reading</label>
@@ -134,14 +149,21 @@
     
     
     <!-- if payment exceeds 4000 give warning -->
-    <p class="pt-4 pb-8">Please settle down your payments as soon as possible or <a href="contact.php">contact us</a> if you have any difficulties to avoid your electricity disconnection</p>
-   
+    <!-- @if(session('balance') > 4000)
+        <p class="pt-4 pb-8">Please settle down your payments as soon as possible or <a href="contact.php">contact us</a> if you have any difficulties to avoid your electricity disconnection</p>
+    @endif -->
     
 </div>
 </div>
             </div>
         </div>
     </div>
+
+    <!-- <script>
+        document.getElementById("btn").addEventListener("click", function(event){
+        event.preventDefault();
+        });
+    </script> -->
 </x-app-layout>
 
 

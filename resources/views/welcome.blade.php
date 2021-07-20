@@ -63,9 +63,17 @@
 
     <div class="container">
     
+    @if (session('msg'))
     <div class="message">
         <h5>{{session('msg')}}</h5>
+        <!-- <form action="/" method="POST">
+            <input type="button" name="close" value="X">
+        </form> -->
     </div>
+    @endif
+
+
+
 
         <!-- Card -->
         <div class="card-section grid">

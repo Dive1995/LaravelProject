@@ -26,8 +26,20 @@ class UserController extends Controller
         $allusers->balance = request('balance');
         $allusers->ceb = request('ceb');
         $allusers->hasAccount = 'no';
-        $allusers->save();
 
+
+        $mobileregex = "/^[0-9]{10}$/" ;  
+    $nicregex = "/^[0-9]{9}[v]$/" ;  
+
+        if(preg_match($mobileregex, request('phone')) === 1){
+            if(preg_match($nicregex, request('nic')) === 1){
+                $allusers->save();
+            }else{
+                return Redirect::back()->withErrors([ 'Invalid NIC number']);
+            }
+        }else{
+            return Redirect::back()->withErrors([ 'Invalid Phone number']);
+        }
 
         $users = Allusers::all();
         return redirect('/dashboard')->with('users',$users);
@@ -79,7 +91,7 @@ class UserController extends Controller
         // $fdate = $request->Fdate;
         $last_date = request('date');
         // $name = $request->input('name');
-        $datetime1 = new DateTime();//'2021-08-19'
+        $datetime1 = new DateTime('2021-08-19');//'2021-08-19'
         $datetime2 = new DateTime($last_date);
         $interval = $datetime1->diff($datetime2);
         $days = $interval->format('%a');
@@ -161,7 +173,7 @@ class UserController extends Controller
                 session()->flash('display','block');
                 
 
-                return redirect('/dashboard');
+                return redirect('/dashboard')->with('msg','Your reading has successfully updated !!');
             }else{
                 return Redirect::back()->withErrors([ 'You have to attach the meter reading image!!!']);
             }

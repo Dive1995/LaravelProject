@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Billings;
 use DateTime;
+use Illuminate\Support\Facades\Date;
 
 class DashboardController extends Controller
 {
@@ -49,10 +50,12 @@ class DashboardController extends Controller
     // 
 
 
-    // show users those don't have online account and update their reading
+    // show users who didn't update the reading for the month (both registered & unregistered)
     public function updatereading(){
         // use ::whereMonth()
         $users = Allusers::where('hasAccount','no')->get();
+        // $month = new Date('m');
+        // $users = Allusers::whereMonth('updated_at','no')->get();
         // $users = Allusers::all();
         return view('updatereading',['users' => $users]);
     }
@@ -66,7 +69,7 @@ class DashboardController extends Controller
         // checking num of days from today and last submitted day
 
         $last_date = $request->updated_at;
-        $datetime1 = new DateTime('2021-08-19');//'2021-08-19'
+        $datetime1 = new DateTime('2021-08-20');//'2021-08-19'
         $datetime2 = new DateTime($last_date);
         $interval = $datetime1->diff($datetime2);
         $days = $interval->format('%a');
@@ -120,7 +123,7 @@ class DashboardController extends Controller
             Allusers::where('ceb',$ceb)->update(['balance'=> $total]);
 
 
-            return redirect('/dashboard');
+            return redirect('/dashboard/updatereading')->with('msg','Reading has successfully updated !!');
 
         }else{
             return Redirect::back()->withErrors([ 'You have already submitted the reading for this month!!']);
