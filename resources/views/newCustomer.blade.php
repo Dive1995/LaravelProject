@@ -21,11 +21,24 @@
                         <h1>Ceylon Electricity Board</h1>
                     </div>
                     <div class="navbar-links">
-                        <ul>
-                            <li><a href="index.php">Home</a></li>
-                            <li><a href="contact.php">Contact Us</a></li>
-                            <li><a href="myceb.php">My CEB</a></li>
-                            <li><a href="login.php">Sign In</a></li>
+                    <ul>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/contact">Contact Us</a></li>
+                            <li><a href="/dashboard">Dashboard</a></li>
+                            @if (Auth::check())
+                                <li>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <a href="route('logout')"
+                                            onclick="event.preventDefault();
+                                            this.closest('form').submit();">
+                                        {{ __('Log Out') }}
+                                    </a>
+                                </form>
+                                </li>
+                            @else
+                            <li><a href="/login">Sign In</a></li>
+                            @endif
                         </ul>
                     </div>
                 </div>
@@ -104,8 +117,8 @@
         <div class="container grid">
             <h3>Copyright &copy; Electricity Board Sri Lanka 2021 </h3>
             <div class="navbar-links">
-                <ul>
-                    <li><a href="index.php">Home</a></li>
+            <ul>
+                    <li><a href="index.php">Dashboard</a></li>
                     <li><a href="contact.php">Contact Us</a></li>
                     <li><a href="myceb.php">My CEB</a></li>
                     <li><a href="login.php">Sign In</a></li>

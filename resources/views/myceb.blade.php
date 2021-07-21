@@ -122,7 +122,7 @@
 
     </div>
 
-    <div class="pt-9  bg-green-100 myceb-form my-9 rounded-lg" style="display: {{session('display') ?? 'none'}}">
+    <div class="pt-9  bg-green-100 myceb-form mt-24 rounded-lg" style="display: {{session('display') ?? 'none'}}">
             <form action="">
                 <div class="grid userinput">
                             <label for="current_readin">This month reading</label>
@@ -143,6 +143,9 @@
                     <div class="grid">
                             <label for="total_payment">Total Payment</label>
                             <input id="total_payment" type="number" disabled placeholder="{{session('total') ?? 'null'}}">
+                    </div>
+                    <div class="mt-6">
+                        <a class="text-blue-600" href="https://online.boc.lk/T001/channel.jsp">Continue with Online Payment ?</a>
                     </div>
             </form>
         </div>
