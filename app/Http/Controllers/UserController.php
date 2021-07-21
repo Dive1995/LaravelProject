@@ -50,10 +50,9 @@ class UserController extends Controller
         $billing = new Billings();
 
         // checking num of days from today and last submitted day
-        // $fdate = $request->Fdate;
         $last_date = request('date');
         // $name = $request->input('name');
-        $datetime1 = new DateTime('2021-08-19');//'2021-08-19'
+        $datetime1 = new DateTime('');//'2021-08-19'
         $datetime2 = new DateTime($last_date);
         $interval = $datetime1->diff($datetime2);
         $days = $interval->format('%a');

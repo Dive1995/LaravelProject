@@ -47,7 +47,7 @@ class DashboardController extends Controller
         // use ::whereMonth()
         // $users = Allusers::where('hasAccount','no')->get();
         $today = getdate();
-        $month = $today["mon"];
+        $month = $today["mon"]-1;
         // error_log($month);
         $users = Allusers::whereMonth('updated_at',$month)->get();
 
@@ -80,7 +80,7 @@ class DashboardController extends Controller
         // checking num of days from today and last submitted day
 
         $last_date = $request->updated_at;
-        $datetime1 = new DateTime('2021-08-20');//'2021-08-19'
+        $datetime1 = new DateTime('');//'2021-08-19'
         $datetime2 = new DateTime($last_date);
         $interval = $datetime1->diff($datetime2);
         $days = $interval->format('%a');
